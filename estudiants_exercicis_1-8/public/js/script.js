@@ -1,15 +1,14 @@
 {
-    async function getCountryDetails() {
+    async function getCountryDetails(country) {
 
-     
-        const country = document.getElementById("country").value;      
-        const response = await fetch( `https://restcountries.eu/rest/v3.1/name/${country}`);         
+          
+        const response = await fetch(`https://restcountries.com/v3.1/name/${country}`);
         // original const response = await fetch(`https://restcountries.com/v3.1/name/`);
 
        
 
         const data = await response.json();
-       
+        
 
         return data;
 
@@ -30,7 +29,11 @@
             label: 'Perú'
         }
         ]
-        const select = document.getElementById('country');
+        //utilizamos el querySelector para seleccionar el elemento que contiene el array de objetos
+        const select = document.querySelector('#country');
+        //utilizamos el forEach para recorrer el array de objetos
+
+
 
         optionsValues.forEach(option => {
             const optionElement = document.createElement('option');
@@ -52,25 +55,38 @@
      */ 
 
 
-     async function setCountryFlag(event) {
+      async function setCountryFlag(event) {
         let countryName = event.target.value;
+        //console.log(countryName);
+       
 
-        let countryData = await getCountryDetails(countryName);
-        //pedimos a la api la bandera del pais seleccionado y la mostramos en el div
-        let countryFlag = countryData[0].flag;
-        let countryFlagElement = document.getElementById('countryFlag');
-        countryFlagElement.innerHTML = `<img src="${countryFlag}" alt="Bandera de ${countryName}">`;
-        console.log(countryFlag);
-    
+        let countryData = await getCountryDetails(countryName)
+        console.log(countryData);
+
+        let population = countryData[0].population;
+        let flagUrl = countryData[0].flags.png;
+        console.log(flagUrl);
+        console.log(population);
+
+        document.getElementById('urlFlag').value = flagUrl;
+        document.getElementById('population').value = population;
+
+         document.querySelector('#imatgeSeleccionada').src = flagUrl;
+        
+
+
+
+
+
+
+            
+
+
 
         // Descomenta la següent línia si no has aconseguit implementar la primera part de l'exercici. Comenta la línia anterior també.   
         //let countryData = await getCountryDetailsFake(countryName);
 
     }
-
-    document.getElementById('country').addEventListener('change', setCountryFlag);
-
-
 
     function getCountryDetailsFake(countryName) {
         const data = {
