@@ -18,8 +18,8 @@ connection.connect();
 /**
  * APARTAT 1 - Canvia la query1
  */
-const query1 = "select * from products";
-
+const query1 = "select product_name,list_price, category from products where category = 'Dried Fruit & Nuts'AND minimum_reorder_quantity=10";
+//select minimum_reorder_quantity,product_name,list_price, category from products where category = 'Dried Fruit & Nuts'AND minimum_reorder_quantity	=10
 connection.query(query1, function(error, results) {
     if (error) {
         console.log("Error1!: ", error);
@@ -27,12 +27,22 @@ connection.query(query1, function(error, results) {
     }
     console.log('The solution for Query1 is: ', results);
     resultsQuery = results;
+
+    
 });
 
 /**
  * APARTAT 2 - Implementa aquí l'endpoint
  */
+app.get('/', function(req, res) {
+    res.render('list-products', {
+        products: resultsQuery
+    });
+    
+}
+);
 
-/**
- * app.listen(3000);
- */
+
+
+  app.listen(3000);
+ 

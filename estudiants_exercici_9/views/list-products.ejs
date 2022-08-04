@@ -12,15 +12,25 @@
 <body>
 
     <table class="w3-table ">
+        
         <tr class="w3-red">
             <th>Product Name</th>
-            <th>List Price</th>
+           
             <th>Category</th>
-
-        </tr>
-
-
+ <th>List Price</th>
+        </tr>  <% for (let i = 0; i < products.length; i++) { %>
+  <tr class="w3-hover-blue">
+  
+                <td><%= products[i].product_name %></td>
+              
+                <td><%= products[i].category %></td>
+             <td><%= products[i].list_price %></td>
+ </tr>
+    
+ 
+<% } %>
         <tr class="w3-hover-blue">
+          
             <td> Potatoes
             </td>
             <td> 40.00
@@ -36,7 +46,7 @@
             <td>Dried Fruit & Nuts
             </td>
         </tr>
-
+ 
     </table>
 
 </body>

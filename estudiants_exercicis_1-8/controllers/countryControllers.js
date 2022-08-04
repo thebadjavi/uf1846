@@ -4,12 +4,20 @@ exports.getHomePage = (req, res) => {
     res.render('index');
 }
 
-exports.postSendData = (req, res) => {
+exports.postSendData = async(req, res) => {
+    //guardamos el objeto en la base de datos y lo mostramos en la vista
+/*   const { conuntryName, population, urlFlag } = req.body;
+    const country = new Country({ conuntryName, population, urlFlag});
+   await country.save()
+ */
+    
     const fakeData = {
         conuntryName: "spain",
         population: 46438420,
         urlFlag: "https://restcountries.eu/data/esp.svg"
     }
-
-    res.send("Dades rebudes:" + JSON.stringify(fakeData));
+    await fakeData.save()
+    res.redirect('/');
 }
+
+
